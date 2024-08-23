@@ -1,0 +1,18 @@
+<aura:component controller="obtenerCursosCompletados" implements="flexipage:availableForAllPageTypes,force:hasRecordId" access="global">
+    <aura:attribute name="cursosCompletados" type="Curso_Completado__c[]" />
+    <aura:attribute name="errorMessage" type="String" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <aura:if isTrue="{!not(empty(v.errorMessage))}">
+        <div class="slds-text-color_error">{!v.errorMessage}</div>
+    </aura:if>
+
+    <aura:if isTrue="{!not(empty(v.cursosCompletados))}">
+        <lightning:card title="Cursos Completados">
+            <aura:iteration items="{!v.cursosCompletados}" var="curso">
+                <p>{!curso.Curso__r.Name} - Fecha de inicio: {!curso.Fecha_de_inicio__c} - Fecha de finalización: {!curso.Fecha_de_finalizaci_n__c}</p>
+            </aura:iteration>
+        </lightning:card>
+    </aura:if>
+</aura:component>	
