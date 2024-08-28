@@ -4,5 +4,8 @@
   "rules": {
     "vars-on-top": "off",
     "no-unused-expressions": "off"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020
   }
 }
