@@ -1,4 +1,4 @@
-<aura:component controller="obtenerCursosCompletados" implements="flexipage:availableForAllPageTypes,force:hasRecordId" access="global">
+<aura:component controller="obtenerCursosCompletados" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global">
     <aura:attribute name="cursosCompletados" type="Curso_Completado__c[]" />
     <aura:attribute name="columns" type="List" />
     <aura:attribute name="errorMessage" type="String" />
@@ -9,27 +9,21 @@
         <div class="slds-text-color_error">{!v.errorMessage}</div>
     </aura:if>
 
-    <aura:if isTrue="{!not(empty(v.cursosCompletados))}">
-        <lightning:card title="Cursos Completados">
-            <aura:iteration items="{!v.cursosCompletados}" var="curso">
-                <p>{!curso.Name} - Fecha de inicio: {!curso.Fecha_de_inicio__c} - Fecha de finalización: {!curso.Fecha_de_finalizaci_n__c}</p>
-            </aura:iteration>
-        </lightning:card>
-    </aura:if>
-
     <!-- Mostrar mensaje si no hay cursos completados -->
     <aura:if isTrue="{!empty(v.cursosCompletados)}">
         <lightning:card title="Cursos Completados">
-            <p>No se han encontrado cursos completados para este usuario.</p>
+            <p class="slds-var-m-around_medium">No se han encontrado cursos completados para este empleado.</p>
         </lightning:card>
     </aura:if>
     
     <aura:if isTrue="{!not(empty(v.cursosCompletados))}">
-        <lightning:datatable 
-        data="{!v.cursosCompletados}" 
-        columns="{!v.columns}" 
-        keyField="Id" 
-        hideCheckboxColumn="true"
-        class="slds-var-m-around_medium" />
+        <lightning:card title="Cursos Completados">
+            <lightning:datatable 
+            data="{!v.cursosCompletados}" 
+            columns="{!v.columns}" 
+            keyField="Id" 
+            hideCheckboxColumn="true"
+            class="slds-var-m-around_medium" />
+        </lightning:card>
     </aura:if>
 </aura:component>	
